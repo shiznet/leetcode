@@ -19,39 +19,23 @@ class Solution:
     # @param head, a ListNode
     # @return a ListNode
     def insertionSortList(self, head):
-        candiNode = head
+        candiNode = head.next
         counter = 1
-        while candiNode.next is not None:
+        while candiNode is not None:
             #pdb.set_trace()
             curNode = candiNode
-            candiNode = candiNode.next
-            self.sortback(head, curNode, counter)
-            counter += 1
+
+            if candiNode.next is None:
+                self.sortback(head,candiNode,counter)
+                candiNode = None
+            else:
+                candiNode = candiNode.next
+                self.sortback(head, curNode, counter)
+
+            # self.sortback(head,curNode,counter)
+
+            counter = counter+1
         return head
-
-    def swapNextNode(self, nodeA, nodeB):
-        '''
-        a-b-c-d-e
-        append a with c.next Node
-        '''
-        if nodeB is None:
-            return
-        #pdb.set_trace()
-        tmpNode = ListNode(-1)
-        tmpNode.next = nodeA.next
-        nodeA.next = nodeB.next
-        nodeB.next = nodeB.next.next
-        nodeA.next.next = tmpNode.next
-
-    def sortback(self, head, node, distance):
-        pointer = head
-        while pointer is not None and distance > 0:
-            #pdb.set_trace()
-            if pointer.next.val >= node.next.val:
-                self.swapNextNode(pointer, node)
-                return
-            pointer = pointer.next
-            distance -= 1
 
     def prepend(self, nodeA, nodeB):
         node = ListNode(nodeA.val)
@@ -59,31 +43,27 @@ class Solution:
         nodeA.val = nodeB.val
         nodeA.next = node
         if nodeB.next is None:
+            #Just reference
             nodeB = None
+            print("none")
         else:
             nodeB.val = nodeB.next.val
             nodeB.next = nodeB.next.next
 
-    def append(self, nodeA, nodeB):
-        node = ListNode(nodeB.val)
-        node.next = nodeA.next
-        nodeA.next = node
-        if nodeB.next is None:
-            #how to remove my self?
-            nodeB = nodeB.next
-        else:
-            nodeB.val = nodeB.next.val
-            nodeB.next = nodeB.next.next
 
     def sortback(self, head, node, counter):
         pointer = head
-        pointerNode = node
-        while counter > 0:
-            if pointer.val > pointerNode.val:
-                self.prepend(pointer, pointerNode)
-                return
-            pointer = pointer.next
-            counter -= 1
+        candidateNode = node
+        if node.next is None:
+            if pointer.val >node.val:
+                self.prepend(pointer,node)
+        else:
+            while counter > 0:
+                if pointer.val > candidateNode.val:
+                    self.prepend(pointer, candidateNode)
+                    return
+                pointer = pointer.next
+                counter -= 1
 
 
     def iterateList(self, node):
@@ -105,7 +85,7 @@ def createTest(array):
 if __name__ == "__main__":
     s = Solution()
     listA = createTest([4, 2, 2, 3, 4])
-    s.prepend(listA,listA.next.next.next.next)
-    # result = s.insertionSortList(listA)
+    #s.prepend(listA,listA.next.next.next.next)
+    result = s.insertionSortList(listA)
     s.iterateList(listA)
 
