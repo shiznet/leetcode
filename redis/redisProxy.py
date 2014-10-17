@@ -6,7 +6,7 @@ class redisproxy(object):
     def __init__(self,
                  **redishosts):
         #self.r = redis.StrictRedis(host=redishosts["host"],port=redishosts["port"],db=0)
-        self.r = redis.Redis(host=redishosts["host"], port=redishosts["port"], db=0)
+        self.r = redis.StrictRedis(host=redishosts["host"], port=redishosts["port"], db=0)
 
     def hgetall(self, tokenKey):
         uidsMap = self.r.hgetall(tokenKey)
@@ -30,4 +30,6 @@ class redisproxy(object):
         self.r.set(key, value)
 
     def scan(self, cursor=0, pattern=None, count=None):
-        result = self.r.scan(cursor, pattern, count)
+        result = self.r.scan_iter(cursor,pattern)
+        for x in result:
+            print "{}".format(x)
