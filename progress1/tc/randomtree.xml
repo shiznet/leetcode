@@ -1,0 +1,22 @@
+<root val="0">
+    <leftnode val="1">
+        <leftnode val="2">
+            <leftnode val="3"/>
+            <rightnode val="4"/>
+        </leftnode>
+        <rightnode val="5">
+            <leftnode val="6"/>
+        </rightnode>
+    </leftnode>
+    <rightnode val="7">
+        <leftnode val="8">
+            <leftnode val="2w"/>
+        </leftnode>
+        <rightnode val="5">
+            <leftnode val="6">
+                <rightnode val="1"/>
+            </leftnode>
+            <rightnode val="2"/>
+        </rightnode>
+    </rightnode>
+</root>
