@@ -1,0 +1,7 @@
+<root name="root" val="0">
+    <leftnode name="l1" val="1">
+        <leftnode name="l1l1" val="2"/>
+        <rightnode name="l1r1" val="3"/>
+    </leftnode>
+    <rightnode name="r1" val="4"/>
+</root>
