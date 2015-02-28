@@ -45,5 +45,5 @@ def recurse(nodeTree):
 
 if __name__ == "__main__":
     builder = NodeTreeBuilder()
-    nodeRoot = builder.build("tc/single.xml")
+    nodeRoot = builder.build("tc/randomtree.xml")
     recurse(nodeRoot)
